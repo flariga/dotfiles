@@ -51,3 +51,5 @@ function proml {
   PS1="\[\033[36m\][\h@\u \W\$(parse_git_branch)]\$\[\033[00m\] "
 }
 proml
+
+TERM=xterm-color
