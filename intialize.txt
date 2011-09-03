@@ -1,0 +1,10 @@
+#dotfiles symlinks
+ln -s ~/dotfiles/_bashrc ~/.bashrc
+ln -s ~/dotfiles/_bash_profile ~/.bash_profile                  
+ln -s ~/dotfiles/_vimrc ~/.vimrc
+ln -s ~/dotfiles/vimfiles ~/.vim
+
+
+#vundle
+git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
+:BundleInstall
