@@ -6,6 +6,13 @@ ln -s ~/dotfiles/vimfiles ~/.vim
 ln -s ~/dotfiles/_gitconfig ~/.gitconfig
 
 
+#vim
+vimから
+:versionで -clipboardなら
+
+
+
 #vundle
 git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
 :BundleInstall
+
