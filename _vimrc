@@ -3,34 +3,69 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
 set textwidth=0
 set autoindent
+"Window幅で折り返し
 set wrap
+"'検索末尾まで言ったら先頭から再検索
 set wrapscan
 set wildmenu
 
-set noignorecase
+"検索時に大文字小文字区別しない
+set ignorecase
 set smartcase
 
+"オートインデント、改行、インサートモード開始直後にBSで削除できるように
+set backspace=indent,eol,start
+
+"移動コマンド利用時に行頭移動しない
+set nostartofline
+"コマンドをステータスラインに表示
 set showcmd
+"ステータスラインを常に表示
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+"画面最下行にルーラー
 set ruler
 "クリップボードをOSと連携(要+clipboardでコンパイル =>viから :versionで確認)
-set clipboard+=unnamed
+set clipboard+=unnamed,autoselect
 "カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 
+"行番号
 set number
 set title
+"検索語をハイライト表示
 set hlsearch
+
+"インデントは2つ
 set tabstop=2
 set shiftwidth=2
 set expandtab
 
+"バックアップ
 set nobackup
-set writebackup
 
-set foldmethod=manual
+" カーソル行をハイライト
+set cursorline
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END
+
+:hi clear CursorLine
+:hi CursorLine gui=underline
+"highlight CursorLine ctermbg=black guibg=black
+
+"保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
+"保存時にtabをスペースに変換する
+autocmd BufWritePre * :%s/\t/  /ge
+
+"折りたたみ
+"set foldmethod=manual
 syntax enable
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -43,13 +78,13 @@ call vundle#rc()
 
 Bundle 'Shougo/neocomplcache'
 Bundle 'hrp/EnhancedCommentify'
-Bundle 'vim-scripts/yanktmp.vim'
-Bundle 'tsaleh/vim-matchit'
+"Bundle 'vim-scripts/yanktmp.vim'
+"Bundle 'tsaleh/vim-matchit'
 Bundle 'tpope/vim-rails'
-Bundle 'vim-scripts/svn-diff.vim'
 Bundle 'tsaleh/vim-align'
 Bundle 'janx/vim-rubytest'
 Bundle 'Shougo/unite.vim'
+Bundle 'rails.vim'
 
 filetype plugin indent on
 
@@ -76,7 +111,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
-	
+
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
@@ -122,7 +157,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
-	let g:neocomplcache_omni_patterns = {}
+  let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
@@ -147,9 +182,9 @@ nnoremap Ur :<C-u>Unite -buffer-name=register register<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ yanktmp.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> sy :call YanktmpYank()<CR>
-map <silent> sp :call YanktmpPaste_p()<CR>
-map <silent> sP :call YanktmpPaste_P()<CR>
+"map <silent> sy :call YanktmpYank()<CR>
+"map <silent> sp :call YanktmpPaste_p()<CR>
+"map <silent> sP :call YanktmpPaste_P()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ eregex.vim
