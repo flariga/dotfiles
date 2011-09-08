@@ -1,0 +1,40 @@
+defscrollback 20000
+nethack off
+#escape ^z^z
+vbell off
+autodetach on
+startup_message off
+hardstatus on
+hardstatus alwayslastline "%{=r dd} %-w%{=b dd} %n %t %{-}%+w %="
+caption always "%{.Rk} >> %n %t"
+msgwait 1
+term xterm-256color
+screen -t SERVER 0
+screen -t CONSOLE 1
+screen -t VIM 2
+
+
+# Key bind
+bind ^k
+bind ^\
+bind \\ quit
+bind p kill
+bind / eval "scrollback 0" "scrollback 10240"
+bind U eval "encoding utf-8" "!!!echo 'export LANG=ja_JP.UTF-8'"
+bind E eval "encoding euc" "!!!echo 'export LANG=ja_JP.EUC-JP'"
+bind l focus
+bind j focus up
+bind k focus down
+
+bind -c REGION 3 split -v
+bind -c REGION 2 split
+bind -c REGION 1 only
+bind -c REGION 0 remove
+bind -c REGION o focus
+bind -c RESIZE = eval 'resize ='  'command -c RESIZE'
+bind -c RESIZE J eval 'resize +5' 'command -c RESIZE'
+bind -c RESIZE K eval 'resize -5' 'command -c RESIZE'
+bind -c RESIZE j eval 'resize +1' 'command -c RESIZE'
+bind -c RESIZE k eval 'resize -1' 'command -c RESIZE'
+bind -c REGION r eval 'echo "j: -1 / k: +1 / other: quit"' 'command -c RESIZE'
+bind x eval 'echo "3: vsplit / 2: split / 1: only / 0: remove / o: focus r: resize"' 'command -c REGION'

@@ -22,13 +22,30 @@ set nostartofline
 set showcmd
 "ステータスラインを常に表示
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"active windows statuslineをわかりやすく
+highlight StatusLine  ctermfg=darkblue ctermbg=white cterm=bold,reverse
+highlight StatusLineNC cterm=bold
 "画面最下行にルーラー
 set ruler
 "クリップボードをOSと連携(要+clipboardでコンパイル =>viから :versionで確認)
 set clipboard+=unnamed,autoselect
-"カーソルを行頭、行末で止まらないようにする
-set whichwrap=b,s,h,l,<,>,[,]
+
+" 行末の空白文字を可視化
+highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
+match WhitespaceEOL /\s\+$/
+autocmd WinEnter * match WhitespaceEOL /\s\+$/
+
+" 行頭のTAB文字を可視化
+highlight TabString ctermbg=red guibg=red
+au BufWinEnter * let w:m2 = matchadd("TabString", '^\t+')
+au WinEnter * let w:m2 = matchadd("TabString", '^\t+')
+
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
+au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
+au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
 
 "行番号
 set number
@@ -55,7 +72,7 @@ augroup END
 
 :hi clear CursorLine
 :hi CursorLine gui=underline
-"highlight CursorLine ctermbg=black guibg=black
+highlight CursorLine ctermbg=black guibg=black
 
 "保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
@@ -85,6 +102,7 @@ Bundle 'tsaleh/vim-align'
 Bundle 'janx/vim-rubytest'
 Bundle 'Shougo/unite.vim'
 Bundle 'rails.vim'
+Bundle 'https://github.com/tpope/vim-fugitive.git'
 
 filetype plugin indent on
 
@@ -194,3 +212,6 @@ nnoremap ? :M?
 nnoremap ,/ /
 nnoremap ,? ?
 
+":set [no]compatible以降に記述
+"カーソルを行頭、行末で止まらないようにする
+set whichwrap=b,s,h,l,<,>,[,]
