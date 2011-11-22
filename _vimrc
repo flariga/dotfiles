@@ -1,4 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""
 """ basics
 """"""""""""""""""""""""""""""""""""""""""""""""""
 set textwidth=0
@@ -33,14 +33,14 @@ set ruler
 set clipboard+=unnamed,autoselect
 
 " 行末の空白文字を可視化
-highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
-match WhitespaceEOL /\s\+$/
-autocmd WinEnter * match WhitespaceEOL /\s\+$/
+"highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
+"match WhitespaceEOL /\s\+$/
+"autocmd WinEnter * match WhitespaceEOL /\s\+$/
 
 " 行頭のTAB文字を可視化
-highlight TabString ctermbg=red guibg=red
-au BufWinEnter * let w:m2 = matchadd("TabString", '^\t+')
-au WinEnter * let w:m2 = matchadd("TabString", '^\t+')
+"highlight TabString ctermbg=red guibg=red
+"au BufWinEnter * let w:m2 = matchadd("TabString", '^\t+')
+"au WinEnter * let w:m2 = matchadd("TabString", '^\t+')
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
@@ -62,17 +62,17 @@ set expandtab
 set nobackup
 
 " カーソル行をハイライト
-set cursorline
+"set cursorline
 " カレントウィンドウにのみ罫線を引く
-augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
-augroup END
+"augroup cch
+"  autocmd! cch
+"  autocmd WinLeave * set nocursorline
+"  autocmd WinEnter,BufRead * set cursorline
+"augroup END
 
-:hi clear CursorLine
-:hi CursorLine gui=underline
-highlight CursorLine ctermbg=black guibg=black
+":hi clear CursorLine
+":hi CursorLine gui=underline
+"highlight CursorLine ctermbg=black guibg=black
 
 "保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
@@ -97,14 +97,20 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'hrp/EnhancedCommentify'
 "Bundle 'vim-scripts/yanktmp.vim'
 "Bundle 'tsaleh/vim-matchit'
-Bundle 'tpope/vim-rails'
+"Bundle 'tpope/vim-rails'
 Bundle 'tsaleh/vim-align'
 Bundle 'janx/vim-rubytest'
-Bundle 'Shougo/unite.vim'
-Bundle 'rails.vim'
+"Bundle 'Shougo/unite.vim'
+"Bundle 'rails.vim'
 Bundle 'https://github.com/tpope/vim-fugitive.git'
+"Bundle 'https://github.com/vim-scripts/Smooth-Scroll.git'
 
 filetype plugin indent on
+
+"""""""""""""""""""""""""""
+"vim-rubytest
+""""""""""""""""""""""""""
+let g:rubytest_in_quickfix = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " neocomplcache
@@ -186,15 +192,15 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """ unite.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""
-let g:unite_enable_start_insert=0
-nnoremap Ua :<C-u>Unite buffer<CR>
-nnoremap Uf :<C-u>Unite file<CR>
-nnoremap Um :<C-u>Unite file_mru<CR>
-nnoremap Uu :<C-u>Unite buffer file_mru<CR>
-nnoremap Ud :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap Ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru
-"bookmark file<CR>
-nnoremap Ur :<C-u>Unite -buffer-name=register register<CR>
+"let g:unite_enable_start_insert=0
+"nnoremap Ua :<C-u>Unite buffer<CR>
+"nnoremap Uf :<C-u>Unite file<CR>
+"nnoremap Um :<C-u>Unite file_mru<CR>
+"nnoremap Uu :<C-u>Unite buffer file_mru<CR>
+"nnoremap Ud :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+"nnoremap Ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru
+""bookmark file<CR>
+"nnoremap Ur :<C-u>Unite -buffer-name=register register<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -208,9 +214,9 @@ nnoremap Ur :<C-u>Unite -buffer-name=register register<CR>
 """ eregex.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "nnoremap / :M/
-nnoremap ? :M?
-nnoremap ,/ /
-nnoremap ,? ?
+"nnoremap ? :M?
+"nnoremap ,/ /
+"nnoremap ,? ?
 
 ":set [no]compatible以降に記述
 "カーソルを行頭、行末で止まらないようにする
