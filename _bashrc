@@ -1,15 +1,11 @@
-export RUBYLIB=/usr/local/lib/ruby/gems/1.8:$RUBYLIB
-export RUBYLIB=/usr/local/lib/ruby/site_ruby/1.8:$RUBYLIB
-export RUBYLIB=/opt/local/lib/ruby/vendor_ruby/1.8:$RUBYLIB
-export RUBYLIB=/opt/local/lib/ruby/vendor_ruby/1.8/i686-darwin10:$RUBYLIB
+#export RUBYLIB=/usr/local/lib/ruby/gems/1.8:$RUBYLIB
+#export RUBYLIB=/usr/local/lib/ruby/site_ruby/1.8:$RUBYLIB
+#export RUBYLIB=/opt/local/lib/ruby/vendor_ruby/1.8:$RUBYLIB
+#export RUBYLIB=/opt/local/lib/ruby/vendor_ruby/1.8/i686-darwin10:$RUBYLIB
 
-PATH=/opt/local/bin:$PATH
-#rvm
-if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then source "$HOME/.rvm/scripts/rvm" ; fi
-
-rvm use
 export USE_BUNDLER=1
 
+PATH=/opt/local/bin:$PATH
 PATH=/opt/local/lib/mysql5/bin:$PATH
 
 export RUBY_HEAP_MIN_SLOTS=1000000
